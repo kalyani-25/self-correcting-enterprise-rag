@@ -12,6 +12,12 @@ Instead of relying on a single retrieval step, the system follows a multi-stage 
 
 ---
 
+## Architecture
+
+![Self-Correcting RAG Architecture](images/Self-correcting%20RAG%20architecture%20diagram.png)
+
+---
+
 ## System Workflow
 
 User → UI / API → Processing Pipeline  
@@ -25,76 +31,43 @@ User → UI / API → Processing Pipeline
 
 ## Features
 
-- Long-document question answering  
-- Structured retrieval pipeline  
-- Retry mechanism for incomplete answers  
-- Latency and retry tracking  
-- CLI for testing  
-- Streamlit UI for demo  
-- FastAPI backend  
+- Long-document QA  
+- Structured retrieval  
+- Retry mechanism  
+- Latency tracking  
+- CLI + UI + API  
 - Docker support  
-
----
-
-## Project Structure
-
-
-app/
-├── cli.py
-├── pipeline.py
-├── graph.py
-├── llm.py
-├── api.py
-├── demo.py
-
-data/
-outputs/
-scripts/
-tests/
-
 
 ---
 
 ## Setup
 
-```bash
-python -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
-Environment
-OPENAI_API_KEY=your_key
-USE_MOCK_LLM=true
-USE_MOCK_PAGEINDEX=true
-Run CLI
-python -m app.cli \
-  --pdf "data/sample.pdf" \
-  --question "What is this document about?"
-Run UI
-PYTHONPATH=. streamlit run app/demo.py
-
-http://localhost:8501
-
-Run API
-uvicorn app.api:app --reload
-
-http://localhost:8000/docs
-
-Example Output
-
-Answer generated from document
-Retries: 0
-Latency: ~12 ms
-Selected Sections: ["overview", "architecture"]
-
-Docker
-docker-compose up --build
-Purpose
-
-This project demonstrates building a reliable long-document QA system with:
-
-structured retrieval
-iterative refinement
-basic observability
+python -m venv venv  
+source venv/bin/activate  
+pip install -r requirements.txt  
 
 ---
 
+## Run
+
+python -m app.cli --pdf "data/sample.pdf" --question "What is this document about?"
+
+---
+
+## UI
+
+PYTHONPATH=. streamlit run app/demo.py  
+http://localhost:8501  
+
+---
+
+## API
+
+uvicorn app.api:app --reload  
+http://localhost:8000/docs  
+
+---
+
+## Summary
+
+A clean implementation of a long-document QA system with structured retrieval and iterative refinement.
